@@ -5,3 +5,18 @@
 body {
   @apply bg-neutral-900 text-neutral-100;
 }
+
+table td{
+  padding: 0%;
+  border: solid;
+  border-width: 1px;
+  border-color: lightgray;
+}
+
+.btn{
+  color: white;
+  background-color: gray;
+  max-width: 100%;
+  border-radius: 3px;
+  margin: 1px;
+}
