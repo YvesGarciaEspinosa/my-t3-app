@@ -4,7 +4,7 @@ import { productoRouter } from "./producto";
 
 export const appRouter = router({
   auth: authRouter,
-  productoRouter: productoRouter,
+  producto: productoRouter,
 });
 
 // export type definition of API
