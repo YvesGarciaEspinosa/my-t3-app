@@ -8,8 +8,22 @@ export const Form = () => {
   const [descripcion, setDescripcion] = useState("");
   const [inventario, setInventario] = useState(0);
   const [precio, setPrecio] = useState(0);
-  const createProduct = trpc.producto.createProduct.useMutation();
+  
+const utils = trpc.useContext();
+  const createProduct = trpc.producto.createProduct.useMutation({
+  onMutate: () => {
+      utils.producto.getAll.cancel();
+      const optimisticUpdate = utils.producto.getAll.getData();
 
+      if (optimisticUpdate) {
+        utils.producto.getAll.setData(optimisticUpdate);
+      }
+    },
+    onSettled: () => {
+      utils.producto.getAll.invalidate();
+    },
+  },
+  );
   const newSlug = (value: string) =>{
     const newSlug = slugify(value);
     setSlug(newSlug);
